@@ -11,7 +11,7 @@
   position: relative;
   display: inline-block;
   margin: 0;
-  padding: 0 $button-padding;
+  padding: 1px $button-padding 0 $button-padding;
 
   min-width: ($button-padding * 3) + $button-font-size;
   min-height: $button-height + 5px;
@@ -33,15 +33,14 @@
     // used to create a larger button "hit" area
     position: absolute;
     top: -6px;
-    right: -6px;
+    right: -8px;
     bottom: -6px;
-    left: -6px;
+    left: -8px;
     content: ' ';
   }
 
   .icon {
     vertical-align: top;
-    pointer-events: none;
   }
 
   .icon:before,
@@ -52,8 +51,7 @@
     padding: 0 0 $button-border-width 0;
     vertical-align: inherit;
     font-size: $button-icon-size;
-    line-height: $button-height - $button-border-width;
-    pointer-events: none;
+    line-height: $button-height - $button-border-width + 1;
   }
   &.icon-left:before {
     float: left;
@@ -72,74 +70,73 @@
   }
 
   &.button-light {
-    @include button-style($button-light-bg, $button-default-border, $button-light-active-bg, $button-default-active-border, $button-light-text);
+    @include button-style($button-light-bg, $button-light-border, $button-light-active-bg, $button-light-active-border, $button-light-text);
     @include button-clear($button-light-border);
     @include button-outline($button-light-border);
   }
 
   &.button-stable {
-    @include button-style($button-stable-bg, $button-default-border, $button-stable-active-bg, $button-default-active-border, $button-stable-text);
+    @include button-style($button-stable-bg, $button-stable-border, $button-stable-active-bg, $button-stable-active-border, $button-stable-text);
     @include button-clear($button-stable-border);
     @include button-outline($button-stable-border);
   }
 
   &.button-positive {
-    @include button-style($button-positive-bg, $button-default-border, $button-positive-active-bg, $button-default-active-border, $button-positive-text);
+    @include button-style($button-positive-bg, $button-positive-border, $button-positive-active-bg, $button-positive-active-border, $button-positive-text);
     @include button-clear($button-positive-bg);
     @include button-outline($button-positive-bg);
   }
 
   &.button-calm {
-    @include button-style($button-calm-bg, $button-default-border, $button-calm-active-bg, $button-default-active-border, $button-calm-text);
+    @include button-style($button-calm-bg, $button-calm-border, $button-calm-active-bg, $button-calm-active-border, $button-calm-text);
     @include button-clear($button-calm-bg);
     @include button-outline($button-calm-bg);
   }
 
   &.button-assertive {
-    @include button-style($button-assertive-bg, $button-default-border, $button-assertive-active-bg, $button-default-active-border, $button-assertive-text);
+    @include button-style($button-assertive-bg, $button-assertive-border, $button-assertive-active-bg, $button-assertive-active-border, $button-assertive-text);
     @include button-clear($button-assertive-bg);
     @include button-outline($button-assertive-bg);
   }
 
   &.button-balanced {
-    @include button-style($button-balanced-bg, $button-default-border, $button-balanced-active-bg, $button-default-active-border, $button-balanced-text);
+    @include button-style($button-balanced-bg, $button-balanced-border, $button-balanced-active-bg, $button-balanced-active-border, $button-balanced-text);
     @include button-clear($button-balanced-bg);
     @include button-outline($button-balanced-bg);
   }
 
   &.button-energized {
-    @include button-style($button-energized-bg, $button-default-border, $button-energized-active-bg, $button-default-active-border, $button-energized-text);
+    @include button-style($button-energized-bg, $button-energized-border, $button-energized-active-bg, $button-energized-active-border, $button-energized-text);
     @include button-clear($button-energized-bg);
     @include button-outline($button-energized-bg);
   }
 
   &.button-royal {
-    @include button-style($button-royal-bg, $button-default-border, $button-royal-active-bg, $button-default-active-border, $button-royal-text);
+    @include button-style($button-royal-bg, $button-royal-border, $button-royal-active-bg, $button-royal-active-border, $button-royal-text);
     @include button-clear($button-royal-bg);
     @include button-outline($button-royal-bg);
   }
 
   &.button-dark {
-    @include button-style($button-dark-bg, $button-default-border, $button-dark-active-bg, $button-default-active-border, $button-dark-text);
+    @include button-style($button-dark-bg, $button-dark-border, $button-dark-active-bg, $button-dark-active-border, $button-dark-text);
     @include button-clear($button-dark-bg);
     @include button-outline($button-dark-bg);
   }
 }
 
 .button-small {
-  padding: 2px $button-small-padding 1px;
+  padding: 0 $button-small-padding;
   min-width: $button-small-height;
-  min-height: $button-small-height + 2;
+  min-height: $button-small-height + 3;
   font-size: $button-small-font-size;
-  line-height: $button-small-height - $button-border-width - 1;
+  line-height: $button-small-height - $button-border-width + 1;
 
   .icon:before,
   &.icon:before,
   &.icon-left:before,
   &.icon-right:before {
     font-size: $button-small-icon-size;
-    line-height: $button-small-icon-size + 3;
-    margin-top: 3px;
+    line-height: $button-small-height - $button-border-width - 1;
   }
 }
 
@@ -167,8 +164,7 @@
   border-color: transparent;
   background: none;
 
-  &.button.active,
-  &.button.activated {
+  &.button.active {
     border-color: transparent;
     background: none;
     box-shadow: none;
@@ -190,8 +186,7 @@
   background: none;
   box-shadow: none;
 
-  &.active,
-  &.activated {
+  &.active {
     opacity: 0.3;
   }
 }
@@ -235,13 +230,6 @@ input.button.button-block  {
 
 a.button {
   text-decoration: none;
-
-  .icon:before,
-  &.icon:before,
-  &.icon-left:before,
-  &.icon-right:before {
-    margin-top: 2px;
-  }
 }
 
 .button.disabled,

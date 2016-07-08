@@ -1,16 +1,16 @@
 angular.module('bucketList.controllers', ['bucketList.services'])
- 
+
 .controller('SignInCtrl', function ($rootScope, $scope, API, $window) {
     // if the user is already logged in, take him to his bucketlist
     if ($rootScope.isSessionActive()) {
         $window.location.href = ('#/bucket/list');
     }
- 
+
     $scope.user = {
         email: "",
         password: ""
     };
- 
+
     $scope.validateUser = function () {
         var email = this.user.email;
         var password = this.user.password;
@@ -31,16 +31,16 @@ angular.module('bucketList.controllers', ['bucketList.services'])
             $rootScope.notify("Invalid Username or password");
         });
     }
- 
+
 })
- 
+
 .controller('SignUpCtrl', function ($rootScope, $scope, API, $window) {
     $scope.user = {
         email: "",
         password: "",
         name: ""
     };
- 
+
     $scope.createUser = function () {
     	var email = this.user.email;
         var password = this.user.password;
@@ -72,7 +72,7 @@ angular.module('bucketList.controllers', ['bucketList.services'])
         });
     }
 })
- 
+
 .controller('myListCtrl', function ($rootScope, $scope, API, $timeout, $ionicModal, $window) {
     $rootScope.$on('fetchAll', function(){
             API.getAll($rootScope.getToken()).success(function (data, status, headers, config) {
@@ -91,11 +91,11 @@ angular.module('bucketList.controllers', ['bucketList.services'])
             {
                 $scope.noData = false;
             }
- 
+
             $ionicModal.fromTemplateUrl('templates/newItem.html', function (modal) {
                 $scope.newTemplate = modal;
             });
- 
+
             $scope.newTask = function () {
                 $scope.newTemplate.show();
             };
@@ -105,9 +105,9 @@ angular.module('bucketList.controllers', ['bucketList.services'])
             $rootScope.notify("Oops something went wrong!! Please try again later");
         });
     });
- 
+
     $rootScope.$broadcast('fetchAll');
- 
+
     $scope.markCompleted = function (id) {
         $rootScope.show("Please wait... Updating List");
         API.putItem(id, {
@@ -121,9 +121,9 @@ angular.module('bucketList.controllers', ['bucketList.services'])
                 $rootScope.notify("Oops something went wrong!! Please try again later");
             });
     };
- 
- 
- 
+
+
+
     $scope.deleteItem = function (id) {
         $rootScope.show("Please wait... Deleting from List");
         API.deleteItem(id, $rootScope.getToken())
@@ -135,9 +135,9 @@ angular.module('bucketList.controllers', ['bucketList.services'])
                 $rootScope.notify("Oops something went wrong!! Please try again later");
             });
     };
- 
+
 })
- 
+
 .controller('completedCtrl', function ($rootScope,$scope, API, $window) {
         $rootScope.$on('fetchCompleted', function () {
             API.getAll($rootScope.getToken()).success(function (data, status, headers, config) {
@@ -167,7 +167,7 @@ angular.module('bucketList.controllers', ['bucketList.services'])
             }).error(function (data, status, headers, config) {
                 $rootScope.notify("Oops something went wrong!! Please try again later");
             });
- 
+
         });
         
         $rootScope.$broadcast('fetchCompleted');
@@ -183,16 +183,16 @@ angular.module('bucketList.controllers', ['bucketList.services'])
                 });
         };
     })
- 
+
 .controller('newCtrl', function ($rootScope, $scope, API, $window) {
         $scope.data = {
 	        item: ""
 	    };
- 
+
         $scope.close = function () {
             $scope.modal.hide();
         };
- 
+
         $scope.createNew = function () {
 			var item = this.data.item;
         	if (!item) return;
@@ -200,7 +200,7 @@ angular.module('bucketList.controllers', ['bucketList.services'])
             $rootScope.show();
             
             $rootScope.show("Please wait... Creating new");
- 
+
             var form = {
                 item: item,
                 isCompleted: false,
@@ -208,7 +208,7 @@ angular.module('bucketList.controllers', ['bucketList.services'])
                 created: Date.now(),
                 updated: Date.now()
             }
- 
+
             API.saveItem(form, form.user)
                 .success(function (data, status, headers, config) {
                     $rootScope.hide();
